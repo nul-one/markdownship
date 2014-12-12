@@ -1,0 +1,5 @@
+*.pyc
+src/MANIFEST
+src/dist
+env
+
