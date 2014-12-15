@@ -1,47 +1,15 @@
 #!/usr/bin/env python
 
 import argparse
-import markdown
-import sys
-
-def read_file(file_name):
-  try:
-    with open(file_name, "r") as myfile:
-      data=myfile.read()
-      return data
-  except Exception, err:
-    print "Error reading file: " + file_name
-    sys.exit(1)
+from . import mkd_to_html
+import markdownship.file as file
 
 
-def write_file(file_name, data):
-  try:
-    with open(file_name, "w") as myfile:
-      myfile.write(data)
-      return True
-  except Exception, err:
-    print(str(err))
-    return False
-
-
-def mkd_to_html(mkd, template=None):
-  html = markdown.markdown(
-    mkd,
-    extensions=[
-      'markdown.extensions.tables',
-      'markdown.extensions.codehilite',
-      'markdown.extensions.footnotes',
-      'markdown.extensions.toc',
-      ]
-  )
-  if template:
-    return template['contents'].replace(template['tag'], html)
-  else:
-    return html
-  
-  
 def get_arguments():
-  parser = argparse.ArgumentParser(description='Markdown to HTML converter.')
+  parser = argparse.ArgumentParser(
+    prog = "markdownship",
+    version = "0.1.0",
+    description="Markdown to HTML converter." )
   parser.add_argument(
     'mkd_path', type=str,
     help='Input markdown file or directory.')
@@ -69,19 +37,18 @@ def get_arguments():
 def main():
   args = get_arguments()
 
-  data = read_file(args.mkd_path)
+  data = file.read(args.mkd_path)
 
   output = ""
   if args.template:
-    template = {}
-    template['contents'] = read_file(args.template)
-    template['tag'] = args.markdown_tag
-    output = mkd_to_html(data, template)
+    template = file.read(args.template)
+    mkd_tag = args.markdown_tag
+    output = mkd_to_html(data, template, mkd_tag)
   else:
     output = mkd_to_html(data)
 
   if args.out:
-    write_file(args.out, output)
+    file.write(args.out, output)
   else:
     print output
 
