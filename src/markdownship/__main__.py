@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import argparse
+import argparse, markdownship
 from markdownship.convert import mkd_to_html
 import markdownship.file as file
 
@@ -8,7 +8,7 @@ import markdownship.file as file
 def get_arguments():
   parser = argparse.ArgumentParser(
     prog = "markdownship",
-    version = markdownship.version,
+    version = markdownship.__version__,
     description="Markdown to HTML converter." )
   parser.add_argument(
     'mkd_path', type=str,
