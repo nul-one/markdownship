@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
 import argparse
-from . import mkd_to_html
+from markdownship.convert import mkd_to_html
 import markdownship.file as file
 
 
 def get_arguments():
   parser = argparse.ArgumentParser(
     prog = "markdownship",
-    version = "0.1.0",
+    version = markdownship.version,
     description="Markdown to HTML converter." )
   parser.add_argument(
     'mkd_path', type=str,
@@ -16,8 +16,8 @@ def get_arguments():
   parser.add_argument(
     '-t', '--template', dest="template", action="store", type=str,
     help="Path to template file. When used, output will have contents of\
-          template file with %%MKD%% string replaced with html representation\
-          of input markdown file.")
+          template file with %%MARKDOWN%% string replaced with html\
+          representation of input markdown file.")
   parser.add_argument(
     '-o', '--out', dest="out", action="store", type=str,
     help="Output file name when converting single file, or directory path when\
