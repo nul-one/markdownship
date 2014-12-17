@@ -1,5 +1,15 @@
 markdownship
 ==================================================
 
-This project is still far from being usefull. Stay tuned!
+Convert mkd to html using custom html template.
+
+install
+-------------------------
+
+    pip install git+https://github.com/automateship/markdownship.git
+
+how to use
+-------------------------
+
+    python -m markdownship -t html_template_file markdown_file.mkd -o output_file.html
 
