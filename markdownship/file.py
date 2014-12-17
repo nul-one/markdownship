@@ -3,6 +3,7 @@
 
 import os
 
+
 def read(file_name):
   """Read a file on path file_name and return a string with it's contents."""
   try:
@@ -14,7 +15,11 @@ def read(file_name):
 
 
 def write(file_name, data):
-  """Write data string to a file on path file_name."""
+  """Write data string to a file on path file_name.
+     Create directories if needed."""
+  file_dir = os.path.dirname(file_name)
+  if file_dir and not os.path.exists(file_dir):
+    os.makedirs(file_dir)
   try:
     with open(file_name, "w") as myfile:
       myfile.write(data)

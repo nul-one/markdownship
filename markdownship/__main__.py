@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import argparse, markdownship
-from markdownship.convert import mkd_to_html
+from markdownship.convert import *
 import markdownship.file as file
 
 
@@ -26,10 +26,14 @@ def get_arguments():
     '-m', '--markdown-tag', dest="markdown_tag", action="store", type=str,
     help="Tag string in template that will later be replaced by html\
           representation of markdown file. Defaults to %%MARKDOWN%%")
+  parser.add_argument(
+    '-d', '--debug', dest="debug", action="store_true",
+    help="Enable debug mode with print output of each action.")
   parser.set_defaults(
     out=None,
     template=None,
     markdown_tag="%MARKDOWN%",
+    debug=False,
   )
   return parser.parse_args()
 
@@ -37,23 +41,92 @@ def get_arguments():
 def main():
   args = get_arguments()
 
-  data = file.read(args.mkd_path)
+  template = None
 
-  output = ""
   if args.template:
     template = file.read(args.template)
-    mkd_tag = args.markdown_tag
-    output = mkd_to_html(data, template, mkd_tag)
-  else:
-    output = mkd_to_html(data)
 
-  if args.out:
-    file.write(args.out, output)
+  if os.path.isfile(args.mkd_path):
+    # convert one file
+    if args.out:
+      # with defined output
+      if template:
+        mkd_file_to_html_file(
+          mkd_file = args.mkd_path,
+          html_file = args.out,
+          template = template,
+          mkd_tag = args.markdown_tag,
+          debug = args.debug,
+          )
+      else:
+        mkd_file_to_html_file(
+          mkd_file = args.mkd_path,
+          html_file = args.out,
+          debug = args.debug,
+          )
+    else:
+      # without defined output
+      if template:
+        print mkd_to_html(
+          mkd = file.read(args.mkd_path),
+          template = template,
+          mkd_tag = args.markdown_tag,
+          debug = args.debug,
+          )
+      else:
+        print mkd_to_html(
+          mkd = file.read(args.mkd_path),
+          debug = args.debug,
+          )
+  elif os.path.isdir(args.mkd_path):
+    # convert directory
+    if args.out:
+      # with defined output
+      if template:
+        mkdtree_to_htmltree(
+          mkd_root_path = args.mkd_path,
+          html_root_path = args.out,
+          template = template,
+          mkd_tag = args.markdown_tag,
+          debug = args.debug,
+          )
+      else:
+        mkdtree_to_htmltree(
+          mkd_root_path = args.mkd_path,
+          html_root_path=args.out,
+          debug = args.debug,
+          )
+    else:
+      # without defined output
+      if template:
+        mkdtree_to_htmltree(
+          mkd_root_path = args.mkd_path,
+          template = template,
+          mkd_tag = args.markdown_tag,
+          debug = args.debug,
+          )
+      else:
+        mkdtree_to_htmltree(
+          mkd_root_path = args.mkd_path,
+          debug = args.debug,
+          )
   else:
-    print output
+    print "'"+args.mkd_path+"'", "is not file or dir"
+
 
 
 
 if __name__ == "__main__":
   main()
+
+
+
+
+
+
+
+
+
+
+
 
