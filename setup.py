@@ -1,14 +1,19 @@
 #!/usr/bin/env python
 
 from distutils.core import setup
+import markdownship
 
 setup(
-  name='markdownship',
-  version="0.1.0",
-  description='Markdown to html converter.',
-  author='Predrag Mandic',
-  author_email='predrag@phlogisto.com',
-  packages=['markdownship', ],
+  name = 'markdownship',
+  description = markdownship.__doc__.strip(),
+  url = 'https://automateship.com',
+  download_url = \
+    'https://github.com/automateship/markdownship/archive/master.zip',
+  version = markdownship.__version__,
+  author = markdownship.__author__,
+  author_email = 'github@phlogisto.com',
+  license = markdownship.__licence__,
+  packages = ['markdownship', ],
   install_requires = [
     'argparse==1.2.1',
     'markdown==2.3.1',
