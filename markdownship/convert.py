@@ -1,9 +1,14 @@
+"""
+Functions for converting markdown data and files to html format.
+"""
+
+
 import markdown
 import markdownship.file as file
 import os
 
 def mkd_to_html(mkd, template=None, mkd_tag=None, debug=False):
-  """Convert mkd data to html data."""
+  """Convert markdown data string to html string."""
   unicode_mkd = unicode(mkd)
   html = markdown.markdown(
     unicode_mkd,
@@ -26,7 +31,7 @@ def mkd_file_to_html_file(
     template=None,
     mkd_tag=None,
     debug = False ):
-  """Convert mkd file to html file."""
+  """Convert markdown file to html file."""
   mkd_data = file.read(mkd_file)
   if not html_file:
     mkd_name = os.path.basename(mkd_file)
@@ -43,17 +48,18 @@ def mkd_file_to_html_file(
 
 
 def mkdtree_to_htmltree(
-    mkd_root_path,
-    html_root_path=os.path.curdir,
+    source_path,
+    target_path=os.path.curdir,
     template=None,
     mkd_tag=None,
     debug = False ):
-  """Convert mkd tree to  html tree."""
-  for mkd_file in file.find_mkd(mkd_root_path):
+  """Convert every markdown file under source_path to html file in target_path.
+  """
+  for mkd_file in file.find_mkd(source_path):
     html_relative_path = os.path.splitext(mkd_file)[0]+".html"
-    html_file = os.path.join(html_root_path, html_relative_path)
+    html_file = os.path.join(target_path, html_relative_path)
     mkd_file_to_html_file(
-      os.path.join(mkd_root_path,mkd_file),
+      os.path.join(source_path,mkd_file),
       html_file = html_file,
       template = template,
       mkd_tag = mkd_tag,

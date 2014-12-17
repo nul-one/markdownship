@@ -84,30 +84,30 @@ def main():
       # with defined output
       if template:
         mkdtree_to_htmltree(
-          mkd_root_path = args.mkd_path,
-          html_root_path = args.out,
+          source_path = args.mkd_path,
+          target_path = args.out,
           template = template,
           mkd_tag = args.markdown_tag,
           debug = args.debug,
           )
       else:
         mkdtree_to_htmltree(
-          mkd_root_path = args.mkd_path,
-          html_root_path=args.out,
+          source_path = args.mkd_path,
+          target_path=args.out,
           debug = args.debug,
           )
     else:
       # without defined output
       if template:
         mkdtree_to_htmltree(
-          mkd_root_path = args.mkd_path,
+          source_path = args.mkd_path,
           template = template,
           mkd_tag = args.markdown_tag,
           debug = args.debug,
           )
       else:
         mkdtree_to_htmltree(
-          mkd_root_path = args.mkd_path,
+          source_path = args.mkd_path,
           debug = args.debug,
           )
   else:
