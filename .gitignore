@@ -1,5 +1,4 @@
 *.pyc
-src/MANIFEST
-src/dist
-env
+MANIFEST
+dist
 
