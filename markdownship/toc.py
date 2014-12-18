@@ -16,8 +16,9 @@ def create(root_path, template=None, mkd_tag=None, debug=False):
       link = os.path.join(os.path.curdir, os.path.join(d,"index.html"))
       index_mkd += "["+d.upper()+"]("+link+")  \n"
     for f in files:
-      link = os.path.join(os.path.curdir, os.path.splitext(f)[0]+".html")
-      index_mkd += "["+os.path.splitext(f)[0]+"]("+link+")  \n"
+      if f.lower().endswith(".html") and f != "index.html":
+        link = os.path.join(os.path.curdir, os.path.splitext(f)[0]+".html")
+        index_mkd += "["+os.path.splitext(f)[0]+"]("+link+")  \n"
     index_html = mkd_to_html(
       index_mkd,
       template = template,
