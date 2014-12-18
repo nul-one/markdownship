@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import argparse, markdownship
+from markdownship import file, toc
 from markdownship.convert import *
-import markdownship.file as file
 
 
 def get_arguments():
@@ -27,12 +27,16 @@ def get_arguments():
     help="Tag string in template that will later be replaced by html\
           representation of markdown file. Defaults to %%MARKDOWN%%")
   parser.add_argument(
+    '-c', '--toc', dest="toc", action="store_true",
+    help="Generate table of contents on converted directory.")
+  parser.add_argument(
     '-d', '--debug', dest="debug", action="store_true",
     help="Enable debug mode with print output of each action.")
   parser.set_defaults(
     out=None,
     template=None,
     markdown_tag="%MARKDOWN%",
+    toc=False,
     debug=False,
   )
   return parser.parse_args()
@@ -90,11 +94,25 @@ def main():
           mkd_tag = args.markdown_tag,
           debug = args.debug,
           )
+        if args.toc:
+          toc.create(
+            root_path=args.out,
+            template=template,
+            mkd_tag = args.markdown_tag,
+            debug=False
+          )
       else:
         mkdtree_to_htmltree(
           source_path = args.mkd_path,
           target_path=args.out,
           debug = args.debug,
+          )
+        if args.toc:
+          toc.create(
+            root_path=args.out,
+            template=template,
+            mkd_tag = args.markdown_tag,
+            debug=False
           )
     else:
       # without defined output
@@ -105,10 +123,24 @@ def main():
           mkd_tag = args.markdown_tag,
           debug = args.debug,
           )
+        if args.toc:
+          toc.create(
+            root_path = os.path.curdir(),
+            template=template,
+            mkd_tag = args.markdown_tag,
+            debug=False
+          )
       else:
         mkdtree_to_htmltree(
           source_path = args.mkd_path,
           debug = args.debug,
+          )
+        if args.toc:
+          toc.create(
+            root_path = os.path.curdir(),
+            template=template,
+            mkd_tag = args.markdown_tag,
+            debug=False
           )
   else:
     print "'"+args.mkd_path+"'", "is not file or dir"
