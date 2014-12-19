@@ -1,15 +1,68 @@
 markdownship
 ==================================================
 
-Convert mkd to html using custom html template.
+Convert markdown to html using custom html template.
 
 install
 -------------------------
 
     pip install git+https://github.com/automateship/markdownship.git
 
-how to use
+examples with console client
 -------------------------
 
-    python -m markdownship -t html_template_file markdown_file.mkd -o output_file.html
+### single file
+
+Run following code from shell to convert a single file to markdown
+
+    python -m markdownship -t template_file.html markdown_file.mkd -o output_file.html
+
+### complex documentation
+
+I keep all my documentation in markdown. Consider the following directory tree:
+
+    documentation_root
+    |-- introduction.mkd
+    |-- first_section
+    |   |-- doc_a.mkd
+    |   \-- doc_b.mkd
+    \-- second_section
+        |-- doc_1.mkd
+        |-- doc_2.mkd
+        \-- subsection
+            |-- doc_3.mkd
+            \-- doc_4.mkd
+
+If I execute something like this:
+
+    python -m markdownship -t template_file.html documentation_root -o output_root -c
+
+Now I will have this new directory tree:
+
+    output_root
+    |-- index.html
+    |-- introduction.html
+    |-- first_section
+    |   |-- index.html
+    |   |-- doc_a.html
+    |   \-- doc_b.html
+    \-- second_section
+        |-- index.html
+        |-- doc_1.html
+        |-- doc_2.html
+        \-- subsection
+            |-- index.html
+            |-- doc_3.html
+            \-- doc_4.html
+
+I believe this is self explanatory.
+
+### vimrc entry
+
+I use this entry in my vimrc. When I vim into some markdown file for editing, I can press F9 to open the same document in web browser for better display. This script converts the markdown file to html in `/tmp` directory, fires the browser and finaly deletes the file from /tmp when I'm done viewing.
+
+    :map <F9> :!python -m markdownship -t /usr/share/markdownship/template.html -o /tmp/`basename %`.html %; x-www-browser /tmp/`basename %`.html; rm /tmp/`basename %`.html<CR> 
+
+Of course, you will need to have a html file template at this location `/usr/share/markdownship/template.html` or specify a different one.
+
 
