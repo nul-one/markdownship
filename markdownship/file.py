@@ -1,13 +1,13 @@
 """Collection of file operating wrapper functions.
 """
 
-import os
+import os, codecs
 
 
 def read(file_name):
   """Read a file on path file_name and return a string with it's contents."""
   try:
-    with open(file_name, "r") as myfile:
+    with codecs.open(file_name, mode="r", encoding="utf-8") as myfile:
       data=myfile.read()
       return data
   except Exception, err:
@@ -21,7 +21,7 @@ def write(file_name, data):
   if file_dir and not os.path.exists(file_dir):
     os.makedirs(file_dir)
   try:
-    with open(file_name, "w") as myfile:
+    with codecs.open(file_name, mode="w", encoding="utf-8") as myfile:
       myfile.write(data)
   except Exception, err:
     raise Exception("Error writting file: " + file_name)

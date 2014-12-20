@@ -21,17 +21,17 @@ Run following code from shell to convert a single file to markdown
 
 I keep all my documentation in markdown. Consider the following directory tree:
 
-    documentation_root
-    |-- introduction.mkd
-    |-- first_section
-    |   |-- doc_a.mkd
-    |   \-- doc_b.mkd
-    \-- second_section
-        |-- doc_1.mkd
-        |-- doc_2.mkd
-        \-- subsection
-            |-- doc_3.mkd
-            \-- doc_4.mkd
+    [documentation_root]
+    ├── introduction.mkd
+    ├── [first_section]
+    │   ├── doc_a.mkd
+    │   └── doc_b.mkd
+    └── [second_section]
+        ├── doc_1.mkd
+        ├── doc_2.mkd
+        └── [subsection]
+            ├── doc_3.mkd
+            └── doc_4.mkd
 
 If I execute something like this:
 
@@ -39,23 +39,23 @@ If I execute something like this:
 
 Now I will have this new directory tree:
 
-    output_root
-    |-- index.html
-    |-- introduction.html
-    |-- first_section
-    |   |-- index.html
-    |   |-- doc_a.html
-    |   \-- doc_b.html
-    \-- second_section
-        |-- index.html
-        |-- doc_1.html
-        |-- doc_2.html
-        \-- subsection
-            |-- index.html
-            |-- doc_3.html
-            \-- doc_4.html
+    [output_root]
+    ├── index.html
+    ├── introduction.html
+    ├── [first_section]
+    │   ├── index.html
+    │   ├── doc_a.html
+    │   └── doc_b.html
+    └── [second_section]
+        ├── index.html
+        ├── doc_1.html
+        ├── doc_2.html
+        └── [subsection]
+            ├── index.html
+            ├── doc_3.html
+            └── doc_4.html
 
-I believe this is self explanatory.
+Each `index.html` here contains table of contents for it's current directory.
 
 ### vimrc entry
 
