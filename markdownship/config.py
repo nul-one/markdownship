@@ -1,4 +1,5 @@
-<!DOCTYPE HTML>
+
+default_template='''<!DOCTYPE HTML>
 <html>
 
   <head>
@@ -101,4 +102,5 @@
   </body>
 
 </html>
+'''
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import argparse, markdownship
-from markdownship import file, toc
+from markdownship import file, toc, config
 from markdownship.convert import *
 
 
@@ -19,6 +19,9 @@ def get_arguments():
           template file with %%markdown%% string replaced with html\
           representation of input markdown file.")
   parser.add_argument(
+    '-T', '--default-template', dest="default_template", action="store_true",
+    help="Use markdownship default html template.")
+  parser.add_argument(
     '-o', '--out', dest="out", action="store", type=str,
     help="Output file name when converting single file, or directory path when\
           converting recursively.")
@@ -35,6 +38,7 @@ def get_arguments():
   parser.set_defaults(
     out=None,
     template=None,
+    default_template=False,
     markdown_tag="%markdown%",
     toc=False,
     debug=False,
@@ -49,6 +53,8 @@ def main():
 
   if args.template:
     template = file.read(args.template)
+  elif args.default_template:
+    template = config.default_template
 
   if os.path.isfile(args.markdown):
     # convert one file
