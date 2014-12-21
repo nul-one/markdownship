@@ -55,7 +55,7 @@ def main():
     if args.out:
       # with defined output
       if template:
-        mkd_file_to_html_file(
+        file_to_html(
           mkd_file = args.markdown,
           html_file = args.out,
           template = template,
@@ -63,7 +63,7 @@ def main():
           debug = args.debug,
           )
       else:
-        mkd_file_to_html_file(
+        file_to_html(
           mkd_file = args.markdown,
           html_file = args.out,
           debug = args.debug,
@@ -71,14 +71,14 @@ def main():
     else:
       # without defined output
       if template:
-        print mkd_to_html(
+        print to_html(
           mkd = file.read(args.markdown),
           template = template,
           mkd_tag = args.markdown_tag,
           debug = args.debug,
           )
       else:
-        print mkd_to_html(
+        print to_html(
           mkd = file.read(args.markdown),
           debug = args.debug,
           )
@@ -87,7 +87,7 @@ def main():
     if args.out:
       # with defined output
       if template:
-        mkdtree_to_htmltree(
+        tree_to_html(
           source_path = args.markdown,
           target_path = args.out,
           template = template,
@@ -102,7 +102,7 @@ def main():
             debug=False
           )
       else:
-        mkdtree_to_htmltree(
+        tree_to_html(
           source_path = args.markdown,
           target_path=args.out,
           debug = args.debug,
@@ -117,7 +117,7 @@ def main():
     else:
       # without defined output
       if template:
-        mkdtree_to_htmltree(
+        tree_to_html(
           source_path = args.markdown,
           template = template,
           mkd_tag = args.markdown_tag,
@@ -131,7 +131,7 @@ def main():
             debug=False
           )
       else:
-        mkdtree_to_htmltree(
+        tree_to_html(
           source_path = args.markdown,
           debug = args.debug,
           )

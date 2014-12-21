@@ -7,7 +7,7 @@ import markdown
 import markdownship.file as file
 import os
 
-def mkd_to_html(mkd, template=None, mkd_tag=None, debug=False):
+def to_html(mkd, template=None, mkd_tag=None, debug=False):
   """Convert markdown data string to html string."""
   unicode_mkd = unicode(mkd)
   html = markdown.markdown(
@@ -25,7 +25,7 @@ def mkd_to_html(mkd, template=None, mkd_tag=None, debug=False):
     return html
   
 
-def mkd_file_to_html_file(
+def file_to_html(
     mkd_file,
     html_file=None,
     template=None,
@@ -37,7 +37,7 @@ def mkd_file_to_html_file(
     mkd_name = os.path.basename(mkd_file)
     html_name = os.path.splitext(mkd_name)[0]+".html"
     html_file = os.path.join(os.path.curdir, html_name)
-  html_data = mkd_to_html(
+  html_data = to_html(
     mkd_data,
     template = template,
     mkd_tag = mkd_tag
@@ -47,7 +47,7 @@ def mkd_file_to_html_file(
   file.write(html_file, html_data)
 
 
-def mkdtree_to_htmltree(
+def tree_to_html(
     source_path,
     target_path=os.path.curdir,
     template=None,
@@ -58,7 +58,7 @@ def mkdtree_to_htmltree(
   for mkd_file in file.find_mkd(source_path):
     html_relative_path = os.path.splitext(mkd_file)[0]+".html"
     html_file = os.path.join(target_path, html_relative_path)
-    mkd_file_to_html_file(
+    file_to_html(
       os.path.join(source_path,mkd_file),
       html_file = html_file,
       template = template,
