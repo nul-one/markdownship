@@ -33,6 +33,9 @@ def get_arguments():
     '-c', '--toc', dest="toc", action="store_true",
     help="Generate table of contents on converted directory.")
   parser.add_argument(
+    '-w', '--website', dest="website", action="store_true",
+    help="Website friendly output.")
+  parser.add_argument(
     '-d', '--debug', dest="debug", action="store_true",
     help="Enable debug mode with print output of each action.")
   parser.set_defaults(
@@ -41,6 +44,7 @@ def get_arguments():
     default_template=False,
     markdown_tag="%markdown%",
     toc=False,
+    website=False,
     debug=False,
   )
   return parser.parse_args()
@@ -105,7 +109,8 @@ def main():
             root_path=args.out,
             template=template,
             mkd_tag = args.markdown_tag,
-            debug=False
+            debug=False,
+            website=args.website
           )
       else:
         tree_to_html(

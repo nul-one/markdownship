@@ -8,12 +8,16 @@ import markdownship.file as file
 from markdownship.convert import to_html
 import os
 
-def create(root_path, template=None, mkd_tag=None, debug=False):
+def create(root_path, template=None, mkd_tag=None, website=False, debug=False):
   """Creates tables of contents for each directory as index.html file"""
   for path, dirs, files in os.walk(root_path):
     index_mkd = ""
     for d in sorted(dirs):
-      link = os.path.join(os.path.curdir, os.path.join(d,"index.html"))
+      link=""
+      if website:
+        link = os.path.join(os.path.curdir, d)
+      else:
+        link = os.path.join(os.path.curdir, os.path.join(d,"index.html"))
       index_mkd += "* [[ "+d.replace('_',' ')+" ]]("+link+")\n\n"
     for f in sorted(files):
       if f.lower().endswith(".html") and f != "index.html":

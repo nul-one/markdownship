@@ -100,7 +100,9 @@ Now I will have this new directory tree:
             ├── doc_3.html
             └── doc_4.html
 
-Each `index.html` here contains table of contents for it's current directory.
+Each directory is named as original one and contains html file in place of each
+markdown file. Each `index.html` here contains table of contents for it's
+current directory.
 
 ### vimrc entry
 
