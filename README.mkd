@@ -13,9 +13,42 @@ examples with console client
 
 ### single file
 
-Run following code from shell to convert a single file to markdown
+Run following code from shell to convert a single markdown file to html.
 
     python -m markdownship -t template_file.html markdown_file.mkd -o output_file.html
+
+Note that we used a template file named `template_file.html`. This should be a
+file on your computer with html and css that defines style for conversion
+output. It is something like this:
+
+    <html>
+      <head>
+        <style type="text/css">
+          body {
+             color             : #fff;
+             background-color  : #000;
+          }
+      </head>
+      <body>
+        %markdown%
+      </body>
+    </html>
+
+Note the `%markdown%` string in your `<body>` tag. This will be replaced with
+actual markdown data represented by html. The rest of the template file is a
+wrapper that provides style and structure. If you want to use a different
+indicator in your template file, just use `-m` option followed by the string
+you want to use, e.g.
+
+    python -m markdownship -m <markdown_goes_here> -t template_file.html markdown_file.mkd -o output_file.html
+
+and then put `<markdown_goes_here>` in the body tag of your template file.
+
+Note that there is a default template provided by the package (in the
+`config.py` file) so you can try conversion without custom template. To use it
+run it with `-T` option like so:
+
+    python -m markdownship -T markdown_file.mkd -o output_file.html
 
 ### complex documentation
 
@@ -35,7 +68,7 @@ I keep all my documentation in markdown. Consider the following directory tree:
 
 If I execute something like this:
 
-    python -m markdownship -t template_file.html documentation_root -o output_root -c
+    python -m markdownship -T documentation_root -o output_root -c
 
 Now I will have this new directory tree:
 
@@ -59,10 +92,12 @@ Each `index.html` here contains table of contents for it's current directory.
 
 ### vimrc entry
 
-I use this entry in my vimrc. When I vim into some markdown file for editing, I can press F9 to open the same document in web browser for better display. This script converts the markdown file to html in `/tmp` directory, fires the browser and finaly deletes the file from /tmp when I'm done viewing.
+I use this entry in my vimrc. When I vim into some markdown file for editing,
+I can press F9 to open the same document in web browser for better display.
+This script converts the markdown file to html in `/tmp` directory, fires a
+browser and finaly deletes the file from /tmp when I'm done viewing:
 
-    :map <F9> :!python -m markdownship -t /usr/share/markdownship/template.html -o /tmp/`basename %`.html %; x-www-browser /tmp/`basename %`.html; rm /tmp/`basename %`.html<CR> 
+    :map <F9> :!python -m markdownship -T -o /tmp/`basename %`.html %; x-www-browser /tmp/`basename %`.html; rm /tmp/`basename %`.html<CR> 
 
-Of course, you will need to have a html file template at this location `/usr/share/markdownship/template.html` or specify a different one.
 
 
