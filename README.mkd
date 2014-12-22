@@ -15,12 +15,14 @@ examples with console client
 
 Run following code from shell to convert a single markdown file to html.
 
+    :::bash
     python -m markdownship -t template_file.html markdown_file.mkd -o output_file.html
 
 Note that we used a template file named `template_file.html`. This should be a
 file on your computer with html and css that defines style for conversion
 output. It is something like this:
 
+    :::html
     <html>
       <head>
         <style type="text/css">
@@ -40,6 +42,7 @@ wrapper that provides style and structure. If you want to use a different
 indicator in your template file, just use `-m` option followed by the string
 you want to use, e.g.
 
+    :::bash
     python -m markdownship -m <markdown_goes_here> -t template_file.html markdown_file.mkd -o output_file.html
 
 and then put `<markdown_goes_here>` in the body tag of your template file.
@@ -48,6 +51,7 @@ Note that there is a default template provided by the package (in the
 `config.py` file) so you can try conversion without custom template. To use it
 run it with `-T` option like so:
 
+    :::bash
     python -m markdownship -T markdown_file.mkd -o output_file.html
 
 ### complex documentation
@@ -97,6 +101,8 @@ I can press F9 to open the same document in web browser for better display.
 This script converts the markdown file to html in `/tmp` directory, fires a
 browser and finaly deletes the file from /tmp when I'm done viewing:
 
+    :::vim
+    set shell=/bin/bash
     :map <F9> :!python -m markdownship -T -o /tmp/`basename %`.html %; x-www-browser /tmp/`basename %`.html; rm /tmp/`basename %`.html<CR> 
 
 

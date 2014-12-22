@@ -17,6 +17,7 @@ setup(
   install_requires = [
     'argparse==1.2.1',
     'markdown==2.3.1',
+    'pygments==2.0.1',
     ],
   )
 

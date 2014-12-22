@@ -17,6 +17,7 @@ def to_html(mkd, template=None, mkd_tag=None, debug=False):
       'markdown.extensions.codehilite',
       'markdown.extensions.footnotes',
       'markdown.extensions.toc',
+      'markdown.extensions.codehilite(guess_lang=False)',
       ]
   )
   if template and mkd_tag:
