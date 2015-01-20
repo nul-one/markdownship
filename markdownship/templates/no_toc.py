@@ -10,7 +10,7 @@ template='''<!DOCTYPE HTML>
       }
       body {
         color             : #000;
-        background-color  : #ff8;
+        background-color  : #fff;
       }
   
       table {
@@ -168,9 +168,6 @@ template='''<!DOCTYPE HTML>
 
   <body>
     <div id='wrapper'>
-      <div id='toc'>
-        %toc%
-      </div>
       <div id='contents'>
         %markdown%
       </div>
