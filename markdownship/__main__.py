@@ -64,7 +64,7 @@ def main():
     # convert one file
     template_name = args.template_name or "default_no_toc"
     template_lib = importlib.import_module(
-      "markdownship.templates."+args.template_name)
+      "markdownship.templates."+template_name)
     template = template_lib.template
     html = file_to_html(
       mkd_file = args.markdown,
@@ -80,7 +80,7 @@ def main():
     # convert directory
     template_name = args.template_name or "default"
     template_lib = importlib.import_module(
-      "markdownship.templates."+args.template_name)
+      "markdownship.templates."+template_name)
     template = template_lib.template
     tree_to_html(
       source_path = args.markdown,
