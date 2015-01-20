@@ -13,7 +13,7 @@ setup(
   author = markdownship.__author__,
   author_email = 'github@phlogisto.com',
   license = markdownship.__licence__,
-  packages = ['markdownship', ],
+  packages = ['markdownship', 'markdownship.templates'],
   install_requires = [
     'argparse==1.2.1',
     'markdown==2.3.1',
