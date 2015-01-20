@@ -54,14 +54,14 @@ def file_to_html(
   html_data = to_html(
     mkd=mkd_data,
     debug=debug ) or ""
+  html = template.replace(mkd_tag, html_data)
   if toc_tag:
     toc_data = toc.create(
       root_path=path.dirname(mkd_file),
       website=website,
       level=0,
       debug=debug ) or ""
-  html = template.replace(mkd_tag, html_data)
-  html = html.replace(toc_tag, toc_data)
+    html = html.replace(toc_tag, toc_data)
   if html_file:
     file.write(html_file, html)
   else:
