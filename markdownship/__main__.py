@@ -62,12 +62,10 @@ def main():
  
   if path.isfile(args.markdown):
     # convert one file
-    if not template_name:
-      template_name = "default_no_toc"
-    else:
-      template_lib = importlib.import_module(
-        "markdownship.templates."+args.template_name)
-      template = template_lib.template
+    template_name = args.template_name or "default_no_toc"
+    template_lib = importlib.import_module(
+      "markdownship.templates."+args.template_name)
+    template = template_lib.template
     html = file_to_html(
       mkd_file = args.markdown,
       html_file = args.out,
@@ -80,12 +78,10 @@ def main():
       print html
   elif path.isdir(args.markdown):
     # convert directory
-    if not template_name:
-      template_name = "default"
-    else:
-      template_lib = importlib.import_module(
-        "markdownship.templates."+args.template_name)
-      template = template_lib.template
+    template_name = args.template_name or "default"
+    template_lib = importlib.import_module(
+      "markdownship.templates."+args.template_name)
+    template = template_lib.template
     tree_to_html(
       source_path = args.markdown,
       target_path = args.out,
