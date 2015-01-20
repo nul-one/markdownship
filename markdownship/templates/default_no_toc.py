@@ -86,7 +86,6 @@ template='''<!DOCTYPE HTML>
         border-width      : 1px;
         border-color      : #ddd;
         border-radius     : 3px;
-        float             : right;
       }
 
       h1 {
