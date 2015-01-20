@@ -45,7 +45,7 @@ def get_arguments():
     markdown_tag="%markdown%",
     toc_tag="%toc%",
     website=False,
-    template_name="default",
+    template_name=None,
     list_templates=False,
     debug=False,
   )
@@ -59,26 +59,33 @@ def main():
     for _, name, _ in pkgutil.iter_modules([pkgpath]):
       print name
     sys.exit()
-  
-  template_lib = importlib.import_module(
-    "markdownship.templates."+args.template_name)
-  template = template_lib.template
-
+ 
   if path.isfile(args.markdown):
     # convert one file
+    if not template_name:
+      template_name = "default_no_toc"
+    else:
+      template_lib = importlib.import_module(
+        "markdownship.templates."+args.template_name)
+      template = template_lib.template
     html = file_to_html(
       mkd_file = args.markdown,
       html_file = args.out,
       template = template,
       mkd_tag = args.markdown_tag,
-      toc_tag = args.toc_tag,
+      toc_tag = None,
       debug = args.debug,
       )
     if not args.out:
       print html
   elif path.isdir(args.markdown):
     # convert directory
-    # with defined output
+    if not template_name:
+      template_name = "default"
+    else:
+      template_lib = importlib.import_module(
+        "markdownship.templates."+args.template_name)
+      template = template_lib.template
     tree_to_html(
       source_path = args.markdown,
       target_path = args.out,
