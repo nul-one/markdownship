@@ -41,15 +41,16 @@ def file_to_html(
     print "   html_file :", html_file
     print "   mkd_tag   :", mkd_tag
     print "   toc_tag   :", toc_tag
-  if dummy:
-    mkd_data = ""
-  else:
+  html=""
+  mkd_data=""
+  html_data=""
+  toc_data=""
+  if not dummy:
     mkd_data = file.read(mkd_file)
   if not html_file:
     mkd_name = path.basename(mkd_file)
     html_name = path.splitext(mkd_name)[0]+".html"
     html_file = path.join(path.curdir, html_name)
-    html_data = ""
   html_data = to_html(
     mkd=mkd_data,
     debug=debug ) or ""
