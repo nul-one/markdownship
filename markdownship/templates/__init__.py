@@ -1,3 +1,4 @@
 """
-markdownship templates
+Markdownship templates.
 """
+

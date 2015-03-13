@@ -1,5 +1,4 @@
-
-template='''<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 
   <head>
@@ -86,7 +85,6 @@ template='''<!DOCTYPE HTML>
         border-width      : 1px;
         border-color      : #ddd;
         border-radius     : 3px;
-        float             : right;
       }
 
       h1 {
@@ -168,9 +166,6 @@ template='''<!DOCTYPE HTML>
 
   <body>
     <div id='wrapper'>
-      <div id='toc'>
-        %toc%
-      </div>
       <div id='contents'>
         %markdown%
       </div>
@@ -178,4 +173,4 @@ template='''<!DOCTYPE HTML>
   </body>
 
 </html>
-'''
+

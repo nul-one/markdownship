@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import argparse, markdownship, sys, importlib, pkgutil
+import argparse, markdownship, sys, importlib, pkgutil, pkg_resources
 from markdownship import config, templates
 from markdownship.convert import *
 from os import path
@@ -63,9 +63,8 @@ def main():
   if path.isfile(args.markdown):
     # convert one file
     template_name = args.template_name or "default_no_toc"
-    template_lib = importlib.import_module(
-      "markdownship.templates."+template_name)
-    template = template_lib.template
+    template = pkg_resources.resource_string(
+      "markdownship.templates", template_name+".html.template")
     html = file_to_html(
       mkd_file = args.markdown,
       html_file = args.out,
@@ -79,9 +78,8 @@ def main():
   elif path.isdir(args.markdown):
     # convert directory
     template_name = args.template_name or "default"
-    template_lib = importlib.import_module(
-      "markdownship.templates."+template_name)
-    template = template_lib.template
+    template = pkg_resources.resource_string(
+      "markdownship.templates", template_name+".html.template")
     tree_to_html(
       source_path = args.markdown,
       target_path = args.out,
