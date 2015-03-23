@@ -78,8 +78,8 @@
         border-radius     : 3px;
         float             : left;
       }
-      #toc a {
-        color             : #0ff;
+      a {
+        color             : #48f;
       }
 
       #contents {
