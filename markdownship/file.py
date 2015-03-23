@@ -43,6 +43,8 @@ def find_mkd(root_path):
     for f in files:
       if is_markdown(f):
         relative_file_path = path.join(root, f)[len(root_path):]
+        if relative_file_path[0] is "/":
+          relative_file_path = relative_file_path[1:]
         mkd_file_list.append(relative_file_path)
   return mkd_file_list
 
