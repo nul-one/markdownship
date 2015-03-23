@@ -133,8 +133,9 @@ def create_dirs(
     print "Adding missing dirs"
   for root, dirs, files in walk(source_path):
     for d in dirs:
-      _, usefull_path = path.split(root[len(source_path):])
-      target_dir = path.join(target_path, usefull_path, d)
+      usefull_path = file.relative_path(
+        source_path, path.join(root, file.trim_path(d)) )
+      target_dir = path.join(target_path, usefull_path)
       if not path.exists(target_dir):
         if debug:
           print "-- making dir:", target_dir

@@ -42,12 +42,25 @@ def find_mkd(root_path):
   for root, dirs, files in walk(root_path):
     for f in files:
       if is_markdown(f):
-        relative_file_path = path.join(root, f)[len(root_path):]
-        if relative_file_path[0] is "/":
-          relative_file_path = relative_file_path[1:]
+        relative_file_path = relative_path(root_path, path.join(root, f))
         mkd_file_list.append(relative_file_path)
   return mkd_file_list
 
+
+def relative_path(root_path, full_path):
+  root_path = trim_path(root_path)
+  full_path = trim_path(full_path)
+  relative_path = full_path[len(root_path):]
+  return trim_path(relative_path)
+
+
+def trim_path(path_str):
+  while path_str[-1:] is path.sep:
+    path_str = path_str[:-1]
+  while path_str[:1] is path.sep:
+    path_str = path_str[1:]
+  return path_str
+  
 
 if __name__ == "__main__":
   import doctest
