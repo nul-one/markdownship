@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import argparse, markdownship, sys, importlib, pkgutil, pkg_resources
+import argparse, markdownship, sys, importlib, pkgutil, pkg_resources, shutil
 from markdownship import config, templates, toc
 from markdownship.convert import *
 from os import path
@@ -38,6 +38,9 @@ def get_arguments():
     help="Output file name when converting single file, or directory path when\
           converting recursively.")
   parser_build.add_argument(
+    '-d', '--data', dest="data", action="store", type=str,
+    help="Name of the data directory. Defaults to _data")
+  parser_build.add_argument(
     '--markdown-tag', dest="markdown_tag", action="store", type=str,
     help="Tag string in template that will later be replaced by html\
           representation of markdown file. Defaults to %%markdown%%")
@@ -52,7 +55,7 @@ def get_arguments():
     '-t', '--template', dest="template_name", action="store", type=str,
     help="Template name.")
   parser_build.add_argument(
-    '-d', '--debug', dest="debug", action="store_true",
+    '-g', '--debug', dest="debug", action="store_true",
     help="Enable debug mode with print output of each action.")
   parser_build.set_defaults(
     out=None,
@@ -60,6 +63,7 @@ def get_arguments():
     toc_tag="%toc%",
     url_tag="%url%",
     url=None,
+    data='_data',
     template_name=None,
     list_templates=False,
     debug=False,
@@ -108,6 +112,11 @@ def main():
       url = url,
       is_local = is_local,
       debug = args.debug ) or ""
+    create_dirs(
+      source_path = args.markdown,
+      target_path = out,
+      debug = args.debug,
+    )
     add_missing_toc(
       target_path = out,
       template = template,
@@ -126,6 +135,10 @@ def main():
       url = url,
       debug = args.debug,
       )
+    data_src = path.join(args.markdown, args.data)
+    data_tgt = path.join(out, args.data)
+    shutil.rmtree(data_tgt, True)
+    shutil.copytree(data_src, data_tgt)
   else:
     print "'"+args.markdown+"'", "is not file or dir"
 

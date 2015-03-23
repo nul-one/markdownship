@@ -5,7 +5,7 @@ Functions for converting markdown data and files to html format.
 import markdown
 from  markdownship import file
 from markdownship import toc
-from os import path, walk
+from os import path, makedirs, walk
 
 
 def to_html(mkd, debug=False):
@@ -71,6 +71,7 @@ def tree_to_html(
     toc_data=None,
     url_tag=None,
     url=None,
+    data_dir=None,
     debug=False ):
   """Convert every markdown file under source_path to html file in target_path.
   """
@@ -107,7 +108,6 @@ def add_missing_toc(
     print "Adding missing index files"
   for root, dirs, files in walk(target_path):
     for d in dirs:
-      _, usefull_path = path.split(root[len(target_path):])
       target_dir = path.join(root, d)
       html_file = path.join(target_dir, "index.html")
       file_to_html(
@@ -118,6 +118,27 @@ def add_missing_toc(
         toc_data=toc_data,
         dummy=True,
         debug=debug )
+  if debug:
+    print "Done"
+    print ""
+
+
+def create_dirs(
+    source_path,
+    target_path,
+    debug=False ):
+  """Create directory structure of html to reflect markdown dir structure.
+  """
+  if debug:
+    print "Adding missing dirs"
+  for root, dirs, files in walk(source_path):
+    for d in dirs:
+      _, usefull_path = path.split(root[len(source_path):])
+      target_dir = path.join(target_path, usefull_path, d)
+      if not path.exists(target_dir):
+        if debug:
+          print "-- making dir:", target_dir
+        makedirs(target_dir)
   if debug:
     print "Done"
     print ""
