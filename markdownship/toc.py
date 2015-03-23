@@ -10,16 +10,18 @@ def create(
     root_path,
     url=None,
     is_local=True,
+    data_dir=None,
     level=0,
     prepend_path="",
     debug=False ):
   """Returns tables of contents for files under root directory as html."""
   if url and prepend_path is "":
     prepend_path=url
-  html = level*"  " + "<ul>\n"
+  html = level * '  ' + "<ul>\n"
   indent = level * '  '
   list_dirs = sorted(
-    [x for x in listdir(root_path) if path.isdir(path.join(root_path,x))])
+    [x for x in listdir(root_path) if path.isdir(path.join(root_path,x))\
+    and (level != 0 or x != data_dir)])
   list_files = sorted(
     [x for x in listdir(root_path) if path.isfile(path.join(root_path,x))\
     and file.is_markdown(x) \
@@ -42,19 +44,19 @@ def create(
     html += indent + '  ' + link + '\n'
     html += create(
       path.join(root_path, d),
-      url,
-      is_local,
-      level+1,
-      path.join(prepend_path, d),
-      debug )
+      url=url,
+      is_local=is_local,
+      level=level+1,
+      data_dir=data_dir,
+      prepend_path=path.join(prepend_path, d),
+      debug = debug )
     html += indent + '  </li>\n'
   html += indent + "</ul>\n"
   if debug:
     print "Create toc"
-    print "  root_path    : " + str(level)
+    print "  prepend_path : " + str(prepend_path)
     print "  level        : " + str(level)
     print "  url          : " + str(url)
-    print "  prepend_path : " + str(prepend_path)
     print "  list_dirs    :", list_dirs
     print "  list_files   :", list_files
     print ""

@@ -111,6 +111,7 @@ def main():
       root_path = args.markdown,
       url = url,
       is_local = is_local,
+      data_dir = args.data,
       debug = args.debug ) or ""
     create_dirs(
       source_path = args.markdown,
