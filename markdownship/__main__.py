@@ -138,8 +138,9 @@ def main():
       )
     data_src = path.join(args.markdown, args.data)
     data_tgt = path.join(out, args.data)
-    shutil.rmtree(data_tgt, True)
-    shutil.copytree(data_src, data_tgt)
+    if path.isdir(data_src):
+      shutil.rmtree(data_tgt, True)
+      shutil.copytree(data_src, data_tgt)
   else:
     print "'"+args.markdown+"'", "is not file or dir"
 
