@@ -74,6 +74,20 @@ Note the `-u` option that we used. It is used to specify root URL of the wiki.
 If you have some links inside markdown files, just use `%url%` tag before the
 relative path and markdownship will replace it with what is specified by `-u`.
 
+data dir
+-------------------------
+
+Default data dir is named `\_data` and should be located in wiki's root
+directory. When you use build command, this directory is copied *as is* to the
+output root. If you use images in markdown files, you can put them in data dir
+and use links to them such as `%url%/_data/images/test.png`.
+If you want to use different data dir name, you can specify it with 
+`--data-tag` option when you build the site.
+
+### header
+
+Put a file named `header.mkd` in data dir and it will be used to create header
+for the site.
 
 templates
 -------------------------

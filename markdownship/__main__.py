@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import argparse, markdownship, sys, importlib, pkgutil, pkg_resources, shutil
-from markdownship import config, templates, toc
+from markdownship import config, templates, toc, header
 from markdownship.convert import *
 from os import path
 
@@ -49,8 +49,9 @@ def get_arguments():
     help="Tag string in template that will later be replaced by table of\
           contents for current directory and below. Defaults to %%toc%%")
   parser_build.add_argument(
-    '-c', '--toc', dest="toc", action="store_true",
-    help="Generate table of contents on converted directory.")
+    '--header-tag', dest="header_tag", action="store", type=str,
+    help="Tag string in template that will later be replaced by header\
+          contents. Defaults to %%header%%")
   parser_build.add_argument(
     '-t', '--template', dest="template_name", action="store", type=str,
     help="Template name.")
@@ -61,6 +62,7 @@ def get_arguments():
     out=None,
     markdown_tag="%markdown%",
     toc_tag="%toc%",
+    header_tag="%header%",
     url_tag="%url%",
     url=None,
     data='_data',
@@ -107,12 +109,18 @@ def main():
     template_name = args.template_name or "default"
     template = pkg_resources.resource_string(
       "markdownship.templates", template_name+".html.template")
+    header_data = header.create(
+      root_path = args.markdown,
+      url = url,
+      is_local = is_local,
+      data_dir = args.data,
+      debug = args.debug ) or " "
     toc_data = toc.create(
       root_path = args.markdown,
       url = url,
       is_local = is_local,
       data_dir = args.data,
-      debug = args.debug ) or ""
+      debug = args.debug ) or " "
     create_dirs(
       source_path = args.markdown,
       target_path = out,
@@ -132,6 +140,8 @@ def main():
       mkd_tag = args.markdown_tag,
       toc_tag = args.toc_tag,
       toc_data = toc_data,
+      header_tag = args.header_tag,
+      header_data = header_data,
       url_tag = args.url_tag,
       url = url,
       debug = args.debug,

@@ -32,6 +32,8 @@ def file_to_html(
     mkd_tag=None,
     toc_tag=None,
     toc_data=None,
+    header_tag=None,
+    header_data=None,
     url_tag=None,
     url=None,
     dummy=False,
@@ -52,6 +54,8 @@ def file_to_html(
     mkd=mkd_data,
     debug=debug ) or ""
   html = template.replace(mkd_tag, html_data)
+  if header_data and header_tag:
+    html = html.replace(header_tag, header_data)
   if toc_data and toc_tag:
     html = html.replace(toc_tag, toc_data)
   if url and url_tag:
@@ -69,6 +73,8 @@ def tree_to_html(
     mkd_tag=None,
     toc_tag=None,
     toc_data=None,
+    header_tag=None,
+    header_data=None,
     url_tag=None,
     url=None,
     data_dir=None,
@@ -87,6 +93,8 @@ def tree_to_html(
       mkd_tag = mkd_tag,
       toc_tag = toc_tag,
       toc_data = toc_data,
+      header_tag = header_tag,
+      header_data = header_data,
       url_tag = url_tag,
       url = url,
       debug = debug )

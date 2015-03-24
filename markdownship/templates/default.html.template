@@ -171,6 +171,9 @@
   </head>
 
   <body>
+    <div id='header'>
+      %header%
+    </div>
     <div id='wrapper'>
       <div id='toc'>
         %toc%
