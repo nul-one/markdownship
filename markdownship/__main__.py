@@ -132,6 +132,8 @@ def main():
       mkd_tag = args.markdown_tag,
       toc_tag = args.toc_tag,
       toc_data = toc_data,
+      header_tag = args.header_tag,
+      header_data = header_data,
       debug = args.debug )
     tree_to_html(
       source_path = args.markdown,

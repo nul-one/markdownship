@@ -109,6 +109,8 @@ def add_missing_toc(
     mkd_tag=None,
     toc_tag=None,
     toc_data=None,
+    header_tag=None,
+    header_data=None,
     debug=False ):
   """Add missing index file for every dir under target_path.
   """
@@ -124,6 +126,8 @@ def add_missing_toc(
         mkd_tag=mkd_tag,
         toc_tag=toc_tag,
         toc_data=toc_data,
+        header_tag=header_tag,
+        header_data=header_data,
         dummy=True,
         debug=debug )
   if debug:
