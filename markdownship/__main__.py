@@ -135,6 +135,11 @@ def main():
       header_tag = args.header_tag,
       header_data = header_data,
       debug = args.debug )
+    data_src = path.join(args.markdown, args.data)
+    data_tgt = path.join(out, args.data)
+    if path.isdir(data_src):
+      shutil.rmtree(data_tgt, True)
+      shutil.copytree(data_src, data_tgt)
     tree_to_html(
       source_path = args.markdown,
       target_path = out,
@@ -148,11 +153,6 @@ def main():
       url = url,
       debug = args.debug,
       )
-    data_src = path.join(args.markdown, args.data)
-    data_tgt = path.join(out, args.data)
-    if path.isdir(data_src):
-      shutil.rmtree(data_tgt, True)
-      shutil.copytree(data_src, data_tgt)
   else:
     print "'"+args.markdown+"'", "is not file or dir"
 
