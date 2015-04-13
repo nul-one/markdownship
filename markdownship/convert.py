@@ -30,11 +30,11 @@ def file_to_html(
     mkd_file=None,
     html_file=None,
     template=None,
-    toc_data=None,
-    header_data=None,
-    footer_data=None,
-    url=None,
-    data_dir=None,
+    toc_data="",
+    header_data="",
+    footer_data="",
+    url="",
+    data_dir="",
     dummy=False,
     debug=False ):
   """Convert markdown file to html file."""
@@ -53,16 +53,11 @@ def file_to_html(
     mkd=mkd_data,
     debug=debug ) or ""
   html = template.replace(config.markdown_tag, html_data)
-  if header_data:
-    html = html.replace(config.header_tag, header_data)
-  if footer_data:
-    html = html.replace(config.footer_tag, footer_data)
-  if toc_data:
-    html = html.replace(config.toc_tag, toc_data)
-  if url:
-    html = html.replace(config.url_tag, url)
-    if data_dir:
-      html = html.replace(config.data_tag, url+'/'+data_dir)
+  html = html.replace(config.header_tag, header_data)
+  html = html.replace(config.footer_tag, footer_data)
+  html = html.replace(config.toc_tag, toc_data)
+  html = html.replace(config.url_tag, url)
+  html = html.replace(config.data_tag, url+'/'+data_dir)
   if html_file:
     file.write(html_file, html)
   else:
