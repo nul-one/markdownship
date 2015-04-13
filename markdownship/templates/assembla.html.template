@@ -119,6 +119,10 @@
         margin            : 0; 
       }
 
+      #footer {
+        text-align        : center;
+      }
+
       #header {
         background-color  : #265087;
         color             : #ffffff;
@@ -214,6 +218,9 @@
       <div id='contents'>
         %markdown%
       </div>
+    </div>
+    <div id='footer'>
+      %footer%
     </div>
   </body>
 

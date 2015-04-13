@@ -32,6 +32,7 @@ def file_to_html(
     template=None,
     toc_data=None,
     header_data=None,
+    footer_data=None,
     url=None,
     data_dir=None,
     dummy=False,
@@ -54,6 +55,8 @@ def file_to_html(
   html = template.replace(config.markdown_tag, html_data)
   if header_data:
     html = html.replace(config.header_tag, header_data)
+  if footer_data:
+    html = html.replace(config.footer_tag, footer_data)
   if toc_data:
     html = html.replace(config.toc_tag, toc_data)
   if url:
@@ -72,6 +75,7 @@ def tree_to_html(
     template=None,
     toc_data=None,
     header_data=None,
+    footer_data=None,
     url=None,
     data_dir=None,
     debug=False ):
@@ -88,6 +92,7 @@ def tree_to_html(
       template = template,
       toc_data = toc_data,
       header_data = header_data,
+      footer_data = footer_data,
       url = url,
       data_dir = data_dir,
       debug = debug )
@@ -101,6 +106,7 @@ def add_missing_toc(
     template,
     toc_data=None,
     header_data=None,
+    footer_data=None,
     debug=False ):
   """Add missing index file for every dir under target_path.
   """
@@ -115,6 +121,7 @@ def add_missing_toc(
         template=template,
         toc_data=toc_data,
         header_data=header_data,
+        footer_data=footer_data,
         dummy=True,
         debug=debug )
   if debug:

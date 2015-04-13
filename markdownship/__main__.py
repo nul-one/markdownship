@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import argparse, markdownship, sys, importlib, pkgutil, pkg_resources, shutil
-from markdownship import config, templates, toc, header
+from markdownship import config, templates, toc, header, footer
 from markdownship.convert import *
 from os import path
 
@@ -93,6 +93,12 @@ def main():
       is_local = is_local,
       data_dir = args.data,
       debug = args.debug ) or " "
+    footer_data = footer.create(
+      root_path = args.markdown,
+      url = url,
+      is_local = is_local,
+      data_dir = args.data,
+      debug = args.debug ) or " "
     toc_data = toc.create(
       root_path = args.markdown,
       url = url,
@@ -109,6 +115,7 @@ def main():
       template = template,
       toc_data = toc_data,
       header_data = header_data,
+      footer_data = footer_data,
       debug = args.debug )
     data_src = path.join(args.markdown, args.data)
     data_tgt = path.join(out, args.data)
@@ -121,6 +128,7 @@ def main():
       template = template,
       toc_data = toc_data,
       header_data = header_data,
+      footer_data = footer_data,
       url = url,
       data_dir = args.data,
       debug = args.debug,

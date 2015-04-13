@@ -5,4 +5,5 @@ data_tag      = "%data%"
 markdown_tag  = "%markdown%"
 toc_tag       = "%toc%"
 header_tag    = "%header%"
+footer_tag    = "%footer%"
 
