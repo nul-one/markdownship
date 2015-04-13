@@ -6,6 +6,7 @@ import markdown
 from  markdownship import file
 from markdownship import toc
 from os import path, makedirs, walk
+from markdownship import config
 
 
 def to_html(mkd, debug=False):
@@ -29,13 +30,10 @@ def file_to_html(
     mkd_file=None,
     html_file=None,
     template=None,
-    mkd_tag=None,
-    toc_tag=None,
     toc_data=None,
-    header_tag=None,
     header_data=None,
-    url_tag=None,
     url=None,
+    data_dir=None,
     dummy=False,
     debug=False ):
   """Convert markdown file to html file."""
@@ -53,13 +51,15 @@ def file_to_html(
   html_data = to_html(
     mkd=mkd_data,
     debug=debug ) or ""
-  html = template.replace(mkd_tag, html_data)
-  if header_data and header_tag:
-    html = html.replace(header_tag, header_data)
-  if toc_data and toc_tag:
-    html = html.replace(toc_tag, toc_data)
-  if url and url_tag:
-    html = html.replace(url_tag, url)
+  html = template.replace(config.markdown_tag, html_data)
+  if header_data:
+    html = html.replace(config.header_tag, header_data)
+  if toc_data:
+    html = html.replace(config.toc_tag, toc_data)
+  if url:
+    html = html.replace(config.url_tag, url)
+    if data_dir:
+      html = html.replace(config.data_tag, url+'/'+data_dir)
   if html_file:
     file.write(html_file, html)
   else:
@@ -70,12 +70,8 @@ def tree_to_html(
     source_path,
     target_path=None,
     template=None,
-    mkd_tag=None,
-    toc_tag=None,
     toc_data=None,
-    header_tag=None,
     header_data=None,
-    url_tag=None,
     url=None,
     data_dir=None,
     debug=False ):
@@ -90,13 +86,10 @@ def tree_to_html(
       mkd_file = path.join(source_path,mkd_file),
       html_file = html_file,
       template = template,
-      mkd_tag = mkd_tag,
-      toc_tag = toc_tag,
       toc_data = toc_data,
-      header_tag = header_tag,
       header_data = header_data,
-      url_tag = url_tag,
       url = url,
+      data_dir = data_dir,
       debug = debug )
   if debug:
     print "Done"
@@ -106,10 +99,7 @@ def tree_to_html(
 def add_missing_toc(
     target_path,
     template,
-    mkd_tag=None,
-    toc_tag=None,
     toc_data=None,
-    header_tag=None,
     header_data=None,
     debug=False ):
   """Add missing index file for every dir under target_path.
@@ -123,10 +113,7 @@ def add_missing_toc(
       file_to_html(
         html_file=html_file,
         template=template,
-        mkd_tag=mkd_tag,
-        toc_tag=toc_tag,
         toc_data=toc_data,
-        header_tag=header_tag,
         header_data=header_data,
         dummy=True,
         debug=debug )

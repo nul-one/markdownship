@@ -30,28 +30,12 @@ def get_arguments():
     help='Define base url that will be used for links \
           (e.g. http://my.wiki.com/me/)')
   parser_build.add_argument(
-    '--url-tag', dest="url_tag", action="store", type=str,
-    help="Tag string in content that will later be replaced by base url.\
-          Defaults to %%url%%")
-  parser_build.add_argument(
     '-o', '--out', dest="out", action="store", type=str,
     help="Output file name when converting single file, or directory path when\
           converting recursively.")
   parser_build.add_argument(
     '-d', '--data', dest="data", action="store", type=str,
     help="Name of the data directory. Defaults to _data")
-  parser_build.add_argument(
-    '--markdown-tag', dest="markdown_tag", action="store", type=str,
-    help="Tag string in template that will later be replaced by html\
-          representation of markdown file. Defaults to %%markdown%%")
-  parser_build.add_argument(
-    '--toc-tag', dest="toc_tag", action="store", type=str,
-    help="Tag string in template that will later be replaced by table of\
-          contents for current directory and below. Defaults to %%toc%%")
-  parser_build.add_argument(
-    '--header-tag', dest="header_tag", action="store", type=str,
-    help="Tag string in template that will later be replaced by header\
-          contents. Defaults to %%header%%")
   parser_build.add_argument(
     '-t', '--template', dest="template_name", action="store", type=str,
     help="Template name.")
@@ -60,10 +44,6 @@ def get_arguments():
     help="Enable debug mode with print output of each action.")
   parser_build.set_defaults(
     out=None,
-    markdown_tag="%markdown%",
-    toc_tag="%toc%",
-    header_tag="%header%",
-    url_tag="%url%",
     url=None,
     data='_data',
     template_name=None,
@@ -93,8 +73,6 @@ def main():
       mkd_file = args.markdown,
       html_file = args.out,
       template = template,
-      mkd_tag = args.markdown_tag,
-      toc_tag = None,
       debug = args.debug,
       )
     if not args.out:
@@ -129,10 +107,7 @@ def main():
     add_missing_toc(
       target_path = out,
       template = template,
-      mkd_tag = args.markdown_tag,
-      toc_tag = args.toc_tag,
       toc_data = toc_data,
-      header_tag = args.header_tag,
       header_data = header_data,
       debug = args.debug )
     data_src = path.join(args.markdown, args.data)
@@ -144,13 +119,10 @@ def main():
       source_path = args.markdown,
       target_path = out,
       template = template,
-      mkd_tag = args.markdown_tag,
-      toc_tag = args.toc_tag,
       toc_data = toc_data,
-      header_tag = args.header_tag,
       header_data = header_data,
-      url_tag = args.url_tag,
       url = url,
+      data_dir = args.data,
       debug = args.debug,
       )
   else:
