@@ -121,6 +121,18 @@
 
       #footer {
         text-align        : center;
+        font-size         : 80%;
+        color             : #aaa;
+      }
+      #footer h1{
+        border-style      : dotted;
+        border-width      : 0 0 2px 0;
+        border-color      : #aaa;
+        font-size         : 80%;
+      }
+      #footer a{
+        color             : #666;
+        text-decoration   : none;
       }
 
       #header {
