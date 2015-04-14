@@ -95,6 +95,11 @@
       }
       #toc a {
         color             : #23f;
+        font-size         : 90%;
+        text-decoration   : none;
+      }
+      #toc a:hover {
+        text-decoration   : underline;
       }
 
       #contents {
