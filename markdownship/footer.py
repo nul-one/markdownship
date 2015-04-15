@@ -3,8 +3,7 @@ Functions for creating tables of contents.
 """
 
 import markdown
-import markdownship.file as file
-import markdownship.convert as convert
+from markdownship import file, convert, config
 from os import path, listdir, walk
 
 footer_name = "footer"
@@ -24,13 +23,16 @@ def create(
     if x.startswith(footer_name) ])
   if len(footer_mkd_files) > 0:
     if len(footer_mkd_files) == 1:
+      if debug:
+        print "Creating footer from", footer_mkd_path
       footer_mkd_path = path.join(data_dir_path, footer_mkd_files[0])
       footer_file = file.read(footer_mkd_path)
       footer_html = convert.to_html(footer_file)
-      if debug:
-        print "Creating footer from", footer_mkd_path
-      return footer_html
     else:
       print "Error: more than one footer file found."
-  return ""
+  if  len(footer_mkd_files) != 1:
+    if debug:
+      print "Creating default footer."
+    footer_html = convert.to_html(config.default_footer)
+  return footer_html
 
