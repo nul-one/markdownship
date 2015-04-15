@@ -83,7 +83,7 @@
         color             : #23f;
       }
 
-      #contents {
+      #markdown {
         background-color  : #fff;
         margin            : 10px 0 10px 0;
         padding           : 10px;
@@ -175,22 +175,14 @@
     </style>
   </head>
 
-  <body>
-    <div id='header'>
-      %header%
-    </div>
-    <div id='wrapper'>
-      <div id='toc'>
-        %toc%
-      </div>
-      <div id='contents'>
-        %markdown%
-      </div>
-    </div>
-    <div id='footer'>
-      %footer%
-    </div>
-  </body>
+<body>
+%header%
+<div id='wrapper'>
+%toc%
+%markdown%
+</div>
+%footer%
+</body>
 
 </html>
 

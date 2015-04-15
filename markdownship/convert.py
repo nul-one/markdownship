@@ -3,14 +3,12 @@ Functions for converting markdown data and files to html format.
 """
 
 import markdown
-from  markdownship import file
-from markdownship import toc
+from  markdownship import file, toc, config
 from os import path, makedirs, walk
-from markdownship import config
 
 
 def to_html(mkd, debug=False):
-  """Convert markdown data string to html string."""
+  """Convert markdown data string to html div."""
   unicode_mkd = unicode(mkd)
   mkd_html = markdown.markdown(
     unicode_mkd,
@@ -52,6 +50,7 @@ def file_to_html(
   html_data = to_html(
     mkd=mkd_data,
     debug=debug ) or ""
+  html_data = "<div id='markdown'>\n" + html_data + "\n</div>\n"
   html = template.replace(config.markdown_tag, html_data)
   html = html.replace(config.header_tag, header_data)
   html = html.replace(config.footer_tag, footer_data)

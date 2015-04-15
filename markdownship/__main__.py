@@ -40,6 +40,9 @@ def get_arguments():
     '-t', '--template', dest="template_name", action="store", type=str,
     help="Template name.")
   parser_build.add_argument(
+    '--no-toc', dest="no_toc", action="store_true",
+    help="Do not create table of contents.")
+  parser_build.add_argument(
     '-g', '--debug', dest="debug", action="store_true",
     help="Enable debug mode with print output of each action.")
   parser_build.set_defaults(
@@ -48,6 +51,7 @@ def get_arguments():
     data='_data',
     template_name=None,
     list_templates=False,
+    no_toc=False,
     debug=False,
   )
   return parser.parse_args()
@@ -66,7 +70,7 @@ def main():
  
   if path.isfile(args.markdown):
     # convert one file
-    template_name = args.template_name or "default_no_toc"
+    template_name = args.template_name or "default"
     template = pkg_resources.resource_string(
       "markdownship.templates", template_name+".html.template")
     html = file_to_html(
@@ -99,24 +103,27 @@ def main():
       is_local = is_local,
       data_dir = args.data,
       debug = args.debug ) or " "
-    toc_data = toc.create(
-      root_path = args.markdown,
-      url = url,
-      is_local = is_local,
-      data_dir = args.data,
-      debug = args.debug ) or " "
+    toc_data = ""
+    if not args.no_toc:
+      toc_data = toc.create(
+        root_path = args.markdown,
+        url = url,
+        is_local = is_local,
+        data_dir = args.data,
+        debug = args.debug ) or " "
     create_dirs(
       source_path = args.markdown,
       target_path = out,
       debug = args.debug,
     )
-    add_missing_toc(
-      target_path = out,
-      template = template,
-      toc_data = toc_data,
-      header_data = header_data,
-      footer_data = footer_data,
-      debug = args.debug )
+    if not args.no_toc:
+      add_missing_toc(
+        target_path = out,
+        template = template,
+        toc_data = toc_data,
+        header_data = header_data,
+        footer_data = footer_data,
+        debug = args.debug )
     data_src = path.join(args.markdown, args.data)
     data_tgt = path.join(out, args.data)
     if path.isdir(data_src):

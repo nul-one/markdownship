@@ -15,9 +15,12 @@ def create(
     prepend_path="",
     debug=False ):
   """Returns tables of contents for files under root directory as html."""
+  html = ""
+  if level == 0:
+    html = "<div id='toc'>\n"
+  html += level * '  ' + "<ul>\n"
   if url and prepend_path is "":
     prepend_path=url
-  html = level * '  ' + "<ul>\n"
   indent = level * '  '
   list_dirs = sorted(
     [x for x in listdir(root_path) if path.isdir(path.join(root_path,x))\
@@ -52,6 +55,8 @@ def create(
       debug = debug )
     html += indent + '  </li>\n'
   html += indent + "</ul>\n"
+  if level == 0:
+    html += "</div>\n"
   if debug:
     print "Create toc"
     print "  prepend_path : " + str(prepend_path)
