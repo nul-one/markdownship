@@ -3,7 +3,8 @@ Functions for converting markdown data and files to html format.
 """
 
 import markdown
-from  markdownship import file, toc, config
+from markdownship import file, config
+#from markdownship import toc
 from os import path, makedirs, walk
 
 

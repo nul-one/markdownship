@@ -105,12 +105,17 @@ def main():
       debug = args.debug ) or " "
     toc_data = ""
     if not args.no_toc:
-      toc_data = toc.create(
+      toc_data = toc.from_file(
         root_path = args.markdown,
-        url = url,
-        is_local = is_local,
         data_dir = args.data,
-        debug = args.debug ) or " "
+        debug = args.debug )
+      if toc_data is None:
+        toc_data = toc.create(
+          root_path = args.markdown,
+          url = url,
+          is_local = is_local,
+          data_dir = args.data,
+          debug = args.debug ) or " "
     create_dirs(
       source_path = args.markdown,
       target_path = out,

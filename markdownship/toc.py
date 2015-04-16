@@ -3,8 +3,10 @@ Functions for creating tables of contents.
 """
 
 import markdown
-import markdownship.file as file
 from os import path, listdir, walk
+from markdownship import file, convert, config
+
+toc_name = "toc"
 
 def create(
     root_path,
@@ -67,4 +69,25 @@ def create(
     print ""
   return html
 
+
+
+def from_file(
+    root_path,
+    data_dir=None,
+    debug=False ):
+  """Create html toc from toc.mkd file in data dir."""
+  toc_html = None
+  data_dir_path = path.join(root_path, data_dir)
+  toc_mkd_files = sorted([ x for x in file.find_mkd(data_dir_path) \
+    if x.startswith(toc_name) ])
+  if len(toc_mkd_files) > 0:
+    if len(toc_mkd_files) == 1:
+      if debug:
+        print "Creating toc from", toc_mkd_path
+      toc_mkd_path = path.join(data_dir_path, toc_mkd_files[0])
+      toc_file = file.read(toc_mkd_path)
+      toc_html = "<div id='toc'>\n" + convert.to_html(toc_file) + "</div>\n"
+    else:
+      print "Error: more than one toc file found."
+  return toc_html
 
