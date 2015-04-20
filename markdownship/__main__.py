@@ -40,6 +40,9 @@ def get_arguments():
     '-t', '--template', dest="template_name", action="store", type=str,
     help="Template name.")
   parser_build.add_argument(
+    '-T', '--custom-template', dest="custom_template", action="store", type=str,
+    help="Path to custom template file.")
+  parser_build.add_argument(
     '--no-toc', dest="no_toc", action="store_true",
     help="Do not create table of contents.")
   parser_build.add_argument(
@@ -50,6 +53,7 @@ def get_arguments():
     url=None,
     data='_data',
     template_name=None,
+    custom_template=None,
     list_templates=False,
     no_toc=False,
     debug=False,
@@ -68,11 +72,26 @@ def main():
       print name
     sys.exit()
  
+  template = None
+  if args.custom_template:
+    try:
+      template = file.read(args.custom_template)
+    except Exception, err:
+      print "ERROR - Custom template: " + str(err)
+      print "  Using existing templates instead."
+  if template is None:
+    template_name = args.template_name or "default"
+    try:
+      template = pkg_resources.resource_string(
+        "markdownship.templates", template_name+".html.template")
+    except Exception, err:
+      print "ERROR - Template: " + str(err)
+      print "  Using default template instead."
+      template = pkg_resources.resource_string(
+        "markdownship.templates", "default"+".html.template")
+
   if path.isfile(args.markdown):
     # convert one file
-    template_name = args.template_name or "default"
-    template = pkg_resources.resource_string(
-      "markdownship.templates", template_name+".html.template")
     html = file_to_html(
       mkd_file = args.markdown,
       html_file = args.out,
@@ -88,9 +107,6 @@ def main():
     url = args.url or "file://"+out
     if args.url:
       is_local = False
-    template_name = args.template_name or "default"
-    template = pkg_resources.resource_string(
-      "markdownship.templates", template_name+".html.template")
     header_data = header.create(
       root_path = args.markdown,
       url = url,
