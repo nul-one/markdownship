@@ -9,7 +9,7 @@
         font-family       : verdana, arial;
       }
       body {
-        color             : #000;
+        color             : #222;
         background-color  : #fff;
         margin            : 0;
         padding           : 0;
@@ -109,9 +109,12 @@
 
       #header {
         width             : 100%;
-        background-color  : #222;
-        color             : #fff;
+        background-color  : #eee;
+        color             : #000;
         padding           : 10px 0;
+        border-color      : #ddd;
+        border-style      : solid;
+        border-width      : 0 0 1px 0;
       }
       #header h1 ,
       #header h2 ,
@@ -124,15 +127,18 @@
         padding-right     : 10px;
       }
       #header a {
-        color             : #bbb;
+        color             : #666;
       }
 
       #footer {
         width             : 100%;
         text-align        : center;
-        background-color  : #222;
-        color             : #fff;
+        background-color  : #eee;
+        color             : #000;
         padding           : 10px 0;
+        border-color      : #ddd;
+        border-style      : solid;
+        border-width      : 1px 0 0 0;
       }
       #footer h1,
       #footer h2,
@@ -144,7 +150,7 @@
         margin            : 10px;
       }
       #footer a {
-        color             : #bbb;
+        color             : #666;
       }
 
       h1 {
