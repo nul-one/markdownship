@@ -34,6 +34,7 @@ def create(
     if debug:
       print "Creating default header."
     header_html = convert.to_html(config.default_header)
+  if header_html:
     header_html = "<div id='header'>\n" + header_html + "\n</div>\n"
   return header_html
 

@@ -34,6 +34,7 @@ def create(
     if debug:
       print "Creating default footer."
     footer_html = convert.to_html(config.default_footer)
-  footer_html = "<div id='footer'>\n" + footer_html + "\n</div>\n"
+  if footer_html:
+    footer_html = "<div id='footer'>\n" + footer_html + "\n</div>\n"
   return footer_html
 
