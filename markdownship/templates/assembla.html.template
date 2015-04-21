@@ -131,9 +131,16 @@
 
       #header {
         width             : 100%;
-        background-color  : #222;
-        color             : #fff;
-        padding           : 10px 0;
+        background-color  : #265087;
+        color             : #ffffff;
+        padding           : 2px 5px 2px 5px;
+        margin            : 0;
+      }
+      #header h1 {
+        padding           : 0; 
+        color             : #ffffff;
+        font-size         : 22px;
+        background-color  : transparent;
       }
       #header h2 ,
       #header h3 ,
@@ -145,7 +152,8 @@
         padding-right     : 10px;
       }
       #header a {
-        color             : #bbb;
+        color             : #ffffff;
+        text-decoration   : none;
       }
 
       #footer {
@@ -166,31 +174,15 @@
       #footer p {
         margin            : 10px;
       }
-      #footer h1{
-        font-size         : 80%;
-      }
       #footer a{
         color             : #666;
         text-decoration   : none;
       }
+      #footer a:hover{
+        color             : #666;
+        text-decoration   : underline;
+      }
 
-      #header {
-        background-color  : #265087;
-        color             : #ffffff;
-        padding           : 2px 5px 2px 5px;
-        margin            : 0;
-      }
-      #header a {
-        background-color  : #265087;
-        color             : #ffffff;
-        text-decoration   : none;
-      }
-      #header h1 {
-        padding           : 0; 
-        color             : #ffffff;
-        font-size         : 22px;
-        background-color  : transparent;
-      }
 
  
       .hll { background-color: #ffffcc }
