@@ -71,18 +71,7 @@
         border-style      : solid;
         border-width      : 0 0 0 5px;
       }
-      
-      ul {
-        /*list-style-type   : none;*/
-      }
-      
-      h2 {
-        font-size         : 20px;
-        border-style      : solid;
-        border-width      : 0 0 1px 0;
-        border-color      : #ddd;
-      }
-
+  
       #wrapper {
         width             : 100%;
         margin            : 0 auto;
@@ -90,6 +79,7 @@
       }
 
       #toc {
+        font-size         : 90%;
         min-width         : 50px;
         background-color  : #fff;
         margin            : 0 10px 0 10px;
@@ -101,9 +91,8 @@
         float             : left;
       }
       #toc ul {
-        font-size 90%;
         list-style-type   : none;
-        padding           : 0 0 0 1em;
+        padding           : 10px 0 10px 1em;
       }
 
       #markdown {
@@ -124,6 +113,12 @@
         padding           : 10px; 
         margin            : 0; 
       }
+      #markdown h2 {
+        font-size         : 20px;
+        border-style      : solid;
+        border-width      : 0 0 1px 0;
+        border-color      : #ddd;
+      }
       #markdown > * {
         margin-left       : 10px;
         margin-right      : 10px;
@@ -132,12 +127,12 @@
       #header {
         width             : 100%;
         background-color  : #265087;
-        color             : #ffffff;
-        padding           : 2px 5px 2px 5px;
-        margin            : 0;
+        color             : #fff;
+        padding           : 10px 0;
       }
       #header h1 {
-        padding           : 0; 
+        padding-left      : 10px;
+        padding-right     : 10px;
         color             : #ffffff;
         font-size         : 22px;
         background-color  : transparent;
@@ -152,14 +147,14 @@
         padding-right     : 10px;
       }
       #header a {
-        color             : #ffffff;
-        text-decoration   : none;
+        color             : #fff;
       }
 
       #footer {
         width             : 100%;
         text-align        : center;
         color             : #aaa;
+        font-size         : 80%;
         padding           : 10px 0;
         border-style      : dotted;
         border-width      : 2px 0 0 0;
@@ -176,13 +171,7 @@
       }
       #footer a{
         color             : #666;
-        text-decoration   : none;
       }
-      #footer a:hover{
-        color             : #666;
-        text-decoration   : underline;
-      }
-
 
  
       .hll { background-color: #ffffcc }

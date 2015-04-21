@@ -79,6 +79,7 @@
       }
 
       #toc {
+        font-size         : 90%;
         min-width         : 50px;
         background-color  : #fff;
         margin            : 0 10px 0 10px;
@@ -90,7 +91,6 @@
         float             : left;
       }
       #toc ul {
-        font-size 90%;
         list-style-type   : none;
         padding           : 0 0 0 1em;
       }
@@ -105,6 +105,16 @@
         border-radius     : 3px;
         overflow          : hidden;
         min-height        : 100%;
+      }
+      #markdown h1 {
+        border-style      : solid;
+        border-width      : 0 0 1px 0;
+        border-color      : #aaa;
+      }
+      #markdown h2 {
+        border-style      : solid;
+        border-width      : 0 0 1px 0;
+        border-color      : #ddd;
       }
 
       #header {
@@ -147,18 +157,7 @@
         color             : #bbb;
       }
 
-      h1 {
-        border-style      : solid;
-        border-width      : 0 0 1px 0;
-        border-color      : #aaa;
-      }
-  
-      h2 {
-        border-style      : solid;
-        border-width      : 0 0 1px 0;
-        border-color      : #ddd;
-      }
-  
+
       .hll { background-color: #ffffcc }
       .c { color: #999988; font-style: italic } /* Comment */
       .err { color: #a61717; background-color: #e3d2d2 } /* Error */
