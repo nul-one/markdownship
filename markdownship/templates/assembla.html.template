@@ -6,13 +6,20 @@
     <link rel="shortcut icon" type="image/png" href="%data%/favicon.ico"/>
     <style type="text/css">
       html {
-        font-family: verdana, arial;
+        font-family       : verdana, arial;
       }
       body {
         color             : #000;
         background-color  : #fff;
         margin            : 0;
         padding           : 0;
+      }
+      a {
+        color             : #23f;
+        text-decoration   : none;
+      }
+      a:hover {
+        text-decoration   : underline;
       }
   
       table {
@@ -79,60 +86,87 @@
       #wrapper {
         width             : 100%;
         margin            : 0 auto;
-        margin-bottom     : 10px;
-        padding           : 0 0 10px 0;
+        padding           : 0;
       }
+
       #toc {
-        width             : 300px;
+        min-width         : 50px;
         background-color  : #fff;
         margin            : 0 10px 0 10px;
-        padding           : 0;
+        padding           : 0 1em 0 0;
         border-style      : solid;
         border-width      : 1px;
         border-color      : #ddd;
         border-radius     : 3px;
         float             : left;
       }
-      #toc a {
-        color             : #23f;
-        font-size         : 90%;
-        text-decoration   : none;
-      }
-      #toc a:hover {
-        text-decoration   : underline;
+      #toc ul {
+        font-size 90%;
+        list-style-type   : none;
+        padding           : 0 0 0 1em;
       }
 
       #markdown {
         background-color  : #fff;
-        margin            : 10px 10px 0 0;
+        margin            : 10px 10px 10px 10px;
         padding           : 0 0 10px 0;
         border-style      : solid;
         border-width      : 1px;
         border-color      : #ddd;
         border-radius     : 3px;
         overflow          : hidden;
+        min-height        : 100%;
       }
-      #contents > * {
-        margin-left       : 10px;
-        margin-right      : 10px;
-      }
-      #contents h1 {
+      #markdown h1 {
         background-color  : #eef3fa;
         color             : #000000;
         font-size         : 22px;
         padding           : 10px; 
         margin            : 0; 
       }
+      #markdown > * {
+        margin-left       : 10px;
+        margin-right      : 10px;
+      }
+
+      #header {
+        width             : 100%;
+        background-color  : #222;
+        color             : #fff;
+        padding           : 10px 0;
+      }
+      #header h2 ,
+      #header h3 ,
+      #header h4 ,
+      #header h5 ,
+      #header h6 ,
+      #header p {
+        padding-left      : 10px;
+        padding-right     : 10px;
+      }
+      #header a {
+        color             : #bbb;
+      }
 
       #footer {
+        width             : 100%;
         text-align        : center;
-        font-size         : 80%;
         color             : #aaa;
+        padding           : 10px 0;
+        border-style      : dotted;
+        border-width      : 2px 0 0 0;
+        border-color      : #aaa;
+      }
+      #footer h1,
+      #footer h2,
+      #footer h3,
+      #footer h4,
+      #footer h5,
+      #footer h6,
+      #footer p {
+        margin            : 10px;
       }
       #footer h1{
-        border-style      : dotted;
-        border-width      : 0 0 2px 0;
-        border-color      : #aaa;
         font-size         : 80%;
       }
       #footer a{
@@ -230,8 +264,8 @@
 %toc%
 %markdown%
 </div>
-%footer%
 <div style="clear:both">&nbsp;</div>
+%footer%
 </body>
 
 </html>
