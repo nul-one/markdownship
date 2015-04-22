@@ -157,6 +157,9 @@
         color             : #bbb;
       }
 
+      .center {
+        text-align        : center;
+      }
 
       .hll { background-color:#222 !important; }
       .err { color:#ccc !important;border:1px solid red !important; }

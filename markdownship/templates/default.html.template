@@ -157,6 +157,9 @@
         color             : #bbb;
       }
 
+      .center {
+        text-align        : center;
+      }
 
       .hll { background-color: #ffffcc }
       .c { color: #999988; font-style: italic } /* Comment */
