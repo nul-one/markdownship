@@ -33,17 +33,17 @@ def create(
     and path.splitext(path.basename(x))[0] != "index" ])
   for f in list_files:
     link_path = path.join(prepend_path, path.splitext(f)[0]+".html")
-    link_name = path.splitext(f)[0]
+    link_name = path.splitext(f)[0].replace('_',' ')
     link = '<a href="' + link_path + '">' + link_name + '</a>'
     html += indent + '  <li>' + link + '</li>\n'
   for d in list_dirs:
     link=""
     if is_local:
       link_path = path.join(prepend_path, d, "index.html")
-      link_name = d
+      link_name = d.replace('_',' ')
     else:
       link_path = path.join(prepend_path, d)
-      link_name = d
+      link_name = d.replace('_',' ')
     link = '<a href="' + link_path + '">' + link_name + '</a>'
     html += indent + '  <li>\n'
     html += indent + '  ' + link + '\n'
