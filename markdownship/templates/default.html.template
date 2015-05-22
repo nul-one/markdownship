@@ -6,7 +6,7 @@
     <link rel="shortcut icon" type="image/png" href="%data%/favicon.ico"/>
     <style type="text/css">
       html {
-        font-family       : verdana, arial;
+        font-family       : arial, verdana;
         font-size         : 14px;
       }
       body {
@@ -14,6 +14,9 @@
         background-color  : #fff;
         margin            : 0;
         padding           : 0;
+      }
+      p {
+        line-height       : 150%;
       }
       a {
         color             : #23f;
@@ -82,18 +85,32 @@
       #toc {
         font-size         : 90%;
         min-width         : 50px;
-        background-color  : #fff;
-        margin            : 0 10px 0 10px;
-        padding           : 0 1em 0 0;
+        background-color  : #f4f4f4;
+        margin            : 0 10px 0 0;
+        padding           : 0 1em 0 1em;
         border-style      : solid;
-        border-width      : 1px;
-        border-color      : #ddd;
+        border-width      : 1px 1px 1px 0;
+        border-color      : #bbb;
         border-radius     : 3px;
         float             : left;
       }
       #toc ul {
         list-style-type   : none;
+        padding           : 0;
+      }
+      #toc li {
+        border-style      : solid;
+        border-width      : 0 0 0 1px;
+        border-color      : #ccc;
         padding           : 0 0 0 1em;
+        margin            : 0;
+      }
+      #toc a {
+        font-weight       : bold;
+        color             : #444;
+      }
+      #toc a:hover {
+        color             : #000;
       }
 
       #markdown {
@@ -225,6 +242,7 @@
       .il { color: #009999 } /* Literal.Number.Integer.Long */
 
     </style>
+    <link rel="stylesheet" type="text/css" href="%data%/style.css">
   </head>
 
 <body>

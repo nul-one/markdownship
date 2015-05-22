@@ -100,8 +100,10 @@ def add_missing_toc(
         target_path,
         template,
         toc_data=None,
-        header_data=None,
-        footer_data=None,
+        header_data="",
+        footer_data="",
+        url="",
+        data_dir="",
         debug=False ):
     """Add missing index file for every dir under target_path.
     """
@@ -115,6 +117,8 @@ def add_missing_toc(
                 html_file=html_file,
                 template=template,
                 toc_data=toc_data,
+                url=url,
+                data_dir=data_dir,
                 header_data=header_data,
                 footer_data=footer_data,
                 dummy=True,

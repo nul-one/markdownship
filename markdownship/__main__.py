@@ -141,6 +141,7 @@ def main():
       add_missing_toc(
         target_path = out,
         template = template,
+        url = url,
         toc_data = toc_data,
         header_data = header_data,
         footer_data = footer_data,
