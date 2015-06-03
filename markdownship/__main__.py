@@ -34,9 +34,6 @@ def get_arguments():
     help="Output file name when converting single file, or directory path when\
           converting recursively.")
   parser_build.add_argument(
-    '-d', '--data', dest="data", action="store", type=str,
-    help="Name of the data directory. Defaults to _data")
-  parser_build.add_argument(
     '-t', '--template', dest="template_name", action="store", type=str,
     help="Template name.")
   parser_build.add_argument(
@@ -51,7 +48,6 @@ def get_arguments():
   parser_build.set_defaults(
     out=None,
     url=None,
-    data='_data',
     template_name=None,
     custom_template=None,
     list_templates=False,
@@ -111,26 +107,22 @@ def main():
       root_path = args.markdown,
       url = url,
       is_local = is_local,
-      data_dir = args.data,
       debug = args.debug ) or " "
     footer_data = footer.create(
       root_path = args.markdown,
       url = url,
       is_local = is_local,
-      data_dir = args.data,
       debug = args.debug ) or " "
     toc_data = ""
     if not args.no_toc:
-      toc_data = toc.from_file(
+      toc_data = toc.create_from_data(
         root_path = args.markdown,
-        data_dir = args.data,
         debug = args.debug )
       if toc_data is None:
         toc_data = toc.create(
           root_path = args.markdown,
           url = url,
           is_local = is_local,
-          data_dir = args.data,
           debug = args.debug ) or " "
     create_dirs(
       source_path = args.markdown,
@@ -146,8 +138,8 @@ def main():
         header_data = header_data,
         footer_data = footer_data,
         debug = args.debug )
-    data_src = path.join(args.markdown, args.data)
-    data_tgt = path.join(out, args.data)
+    data_src = path.join(args.markdown, config.data_dir)
+    data_tgt = path.join(out, config.data_dir)
     if path.isdir(data_src):
       shutil.rmtree(data_tgt, True)
       shutil.copytree(data_src, data_tgt)
@@ -159,7 +151,6 @@ def main():
       header_data = header_data,
       footer_data = footer_data,
       url = url,
-      data_dir = args.data,
       debug = args.debug,
       )
   else:

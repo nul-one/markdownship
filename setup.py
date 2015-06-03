@@ -15,7 +15,7 @@ setup(
   author_email = 'github@phlogisto.com',
   license = markdownship.__licence__,
   #packages = find_packages(exclude=['ez_setup', 'tests', 'tests.*']),
-  packages = ['markdownship', 'markdownship.templates'],
+  packages = ['markdownship', 'markdownship.templates' ],
   package_data={'markdownship.templates': ['*.html.template']},
   include_package_data=True,
   install_requires = [

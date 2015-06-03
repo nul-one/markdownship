@@ -4,7 +4,7 @@ Functions for creating tables of contents.
 
 import markdown
 from os import path, listdir, walk
-from markdownship import file, convert, config
+from markdownship import config, afile, convert
 
 toc_name = "toc"
 
@@ -12,7 +12,6 @@ def create(
         root_path,
         url=None,
         is_local=True,
-        data_dir=None,
         level=0,
         prepend_path="",
         debug=False ):
@@ -26,10 +25,10 @@ def create(
     indent = level * '    '
     list_dirs = sorted(
         [x for x in listdir(root_path) if path.isdir(path.join(root_path,x))\
-        and (level != 0 or x != data_dir)])
+        and (level != 0 or x != config.data_dir)])
     list_files = sorted(
         [x for x in listdir(root_path) if path.isfile(path.join(root_path,x))\
-        and file.is_markdown(x) \
+        and afile(x).is_markdown() \
         and path.splitext(path.basename(x))[0] != "index" ])
     for f in list_files:
         link_path = path.join(prepend_path, path.splitext(f)[0]+".html")
@@ -52,7 +51,6 @@ def create(
             url=url,
             is_local=is_local,
             level=level+1,
-            data_dir=data_dir,
             prepend_path=path.join(prepend_path, d),
             debug = debug )
         html += indent + '    </li>\n'
@@ -71,24 +69,33 @@ def create(
 
 
 
-def from_file(
-        root_path,
-        data_dir=None,
-        debug=False ):
+def create_from_data(root_path, debug=False):
     """Create html toc from toc.mkd file in data dir."""
     toc_html = None
-    data_dir_path = path.join(root_path, data_dir)
-    toc_mkd_files = sorted([ x for x in file.find_mkd(data_dir_path) \
-        if x.startswith(toc_name) ])
+    data_dir_path = path.join(root_path, config.data_dir)
+    toc_mkd_files = [ x for x in afile.find_mkd(data_dir_path) \
+        if x.getbasename() == toc_name ]
     if len(toc_mkd_files) > 0:
         if len(toc_mkd_files) == 1:
+            toc_afile = toc_mkd_files[0]
             if debug:
-                print "Creating toc from", toc_mkd_path
-            toc_mkd_path = path.join(data_dir_path, toc_mkd_files[0])
-            toc_file = file.read(toc_mkd_path)
-            toc_html = \
-                "<div id='toc'>\n" + convert.to_html(toc_file) + "</div>\n"
+                print "Creating toc from", toc_afile.path
+            toc_html = create_from_afile(toc_afile, debug=debug)
         else:
             print "Error: more than one toc file found."
     return toc_html
+
+
+def create_from_afile(toc_afile, debug=False):
+    """Create html toc from custom .mkd afile."""
+    toc_html = None
+    if debug:
+        print "Creating toc from", toc_afile.path
+    toc_data = toc_afile.read()
+    toc_html = "<div id='toc'>\n" + convert.to_html(toc_data) + "</div>\n"
+    return toc_html
+
+        
+
+
 
