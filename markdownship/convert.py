@@ -36,7 +36,11 @@ def afile_to_html(
         debug=False ):
     """Convert markdown file to html file."""
     if debug:
-        print "-- converting:", mkd_afile.path, "to", html_afile.path
+        if not dummy:
+            print "-- converting:", mkd_afile.path, "to", html_afile.path
+        else:
+            print "-- dummy converting:", html_afile.path
+            
     html=""
     mkd_data=""
     html_data=""
@@ -123,11 +127,13 @@ def add_missing_toc(
     """Add missing index file for every dir under target_path.
     """
     if debug:
-        print "Adding missing index files"
+        print "Adding missing index (toc) files"
     for root, dirs, files in walk(target_path):
         for d in dirs:
             toc_dir = path.join(root, d)
             html_afile = afile(path.join(toc_dir, "index.html"))
+            if debug:
+                print "--", html_afile.path
             afile_to_html(
                 html_afile=html_afile,
                 template=template,
