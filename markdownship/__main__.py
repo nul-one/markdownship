@@ -88,9 +88,9 @@ def main():
 
   if path.isfile(args.markdown):
     # convert one file
-    html = file_to_html(
-      mkd_file = args.markdown,
-      html_file = args.out,
+    html = afile_to_html(
+      mkd_afile = afile(args.markdown),
+      html_afile = afile(args.out),
       template = template,
       debug = args.debug,
       )
